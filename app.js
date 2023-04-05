@@ -164,28 +164,15 @@ app.post("/login", function (req, res) {
 
 const PORT = process.env.PORT || 3000 ;
 
-const start = async () => {
+const start = async() => {
   const password = process.env.MONGO_PASSWORD;
-  try {
-    await mongoose.connect(
-      "mongodb+srv://anshulrai077:" +
-        password +
-        "@cluster0.k2q1czn.mongodb.net/?retryWrites=true&w=majority",
-      { useNewUrlParser: true, useUnifiedTopology: true }
-    );
-    mongoose.connection.on("connected", () => {
-      console.log("Connected to MongoDB!");
-      app.listen(PORT, () => {
-        console.log("Server started on port " + PORT);
-      });
-    });
-    mongoose.connection.on("error", (err) => {
-      console.log(err.message);
-    });
-    mongoose.connection.on("disconnected", () => {
-      console.log("Disconnected from MongoDB!");
-    });
-  } catch (e) {
+  try{
+  await mongoose.connect('mongodb+srv://anshulrai077:'+password+'@cluster0.k2q1czn.mongodb.net/?retryWrites=true&w=majority');
+  app.listen(PORT, function () {
+    console.log("server started on port " + PORT);
+  });
+  }
+  catch(e){
     console.log(e.message);
   }
 };
