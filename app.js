@@ -166,9 +166,10 @@ app.post("/login", function (req, res) {
 
 const start = async() => {
   const password = process.env.MONGO_PASSWORD;
+  const PORT = process.env.PORT || 3000 ;
   try{
   await mongoose.connect('mongodb+srv://anshulrai077:'+password+'@cluster0.k2q1czn.mongodb.net/?retryWrites=true&w=majority');
-  app.listen(process.env.PORT || 5000, function () {
+  app.listen(PORT, function () {
     console.log("server started on port " + PORT);
   });
   }
